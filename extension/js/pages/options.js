@@ -125,6 +125,10 @@
    */
   gui.live.checkbox('settings.getCustomUseragentEnabled', 'settings.setCustomUseragentEnabled', 'custom_useragent_enabled');
 
+  /**
+   * Via Header enabled
+   */
+  gui.live.checkbox('settings.getViaHeader', 'settings.setViaHeader', 'via_header');
 
   /**
    * Generate generators switchers

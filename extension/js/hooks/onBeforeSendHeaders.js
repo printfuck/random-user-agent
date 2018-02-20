@@ -44,6 +44,39 @@ chrome.webRequest.onBeforeSendHeaders.addListener(function(details) {
           break;
         }
       }
+      if ( API.settings.getViaHeader() === true){
+        var rand = Math.floor(Math.random()*253+1).toString().concat(
+          ".",
+          Math.floor(Math.random()*253+1).toString(),
+          ".",
+          Math.floor(Math.random()*253+1).toString(),
+          ".",
+          Math.floor(Math.random()*253+1).toString()
+	); 
+        var om = Math.floor(Math.random()*253+1).toString().concat(
+          ".",
+          Math.floor(Math.random()*253+1).toString(),
+          ".",
+          Math.floor(Math.random()*253+1).toString(),
+          ".",
+          Math.floor(Math.random()*253+1).toString()
+	); 
+        details.requestHeaders.push({
+          "name":"Via",
+          "value": "1.1 ".concat(om)
+        });
+
+        details.requestHeaders.push({
+          "name":"X-Forwarded-For",
+          "value": rand
+	});
+        
+	details.requestHeaders.push({
+          "name":"Client-IP",
+          "value": rand
+	});
+      }
+      
       return {requestHeaders: details.requestHeaders};
     }
   }

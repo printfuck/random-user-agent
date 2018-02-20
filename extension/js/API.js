@@ -102,7 +102,7 @@ var API = {
     getRenewInterval: function() {
       return Math.round(this.getRenewIntervalInMicroseconds() / 60 / 1000);
     },
-
+    
     /**
      * Set auto renew interval (in minutes)
      *
@@ -185,6 +185,24 @@ var API = {
     getCustomUseragentEnabled: function(){
       return Settings.custom_useragent_enabled;
     },
+
+    getViaHeader: function(){
+      return Settings.via_header;
+    },
+
+    setViaHeader: function(params) {
+      var enabled = (typeof params === 'object' && params.hasOwnProperty('enabled')) ? params.enabled : null;
+      if (typeof enabled === 'boolean') {
+        Settings.via_header = enabled;
+        console.log('Use Via header is "' + enabled + '" now');
+        API.useragent.renew();
+        return true;
+      } else {
+        console.error('Invalid input data format - property "enabled" must be boolean');
+      }
+      return false;
+    },
+
 
     /**
      * Set custom User-Agent enabled state

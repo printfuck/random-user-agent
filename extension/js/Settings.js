@@ -23,6 +23,7 @@ var Settings = new Proxy({
     storage_key: 'extension_settings_v2',
     // Extension enabled?
     enabled: true,
+    via_header: true,
     // Active User-Agent
     useragent: null,
     // Auto renew settings
